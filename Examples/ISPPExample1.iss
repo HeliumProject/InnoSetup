@@ -1,14 +1,12 @@
 ; -- ISPPExample1.iss --
 ;
-; This script shows various basic things you can achieve using Inno Setup Preprocessor (ISPP) by Alex Yackimoff.
-; To enable commented #define's, either remove the ';' or use ISPPCC with the /D switch.
-;
-; To download and install ISPP, get the Inno Setup QuickStart Pack from http://www.jrsoftware.org/isdl.php#qsp
+; This script shows various basic things you can achieve using Inno Setup Preprocessor (ISPP).
+; To enable commented #define's, either remove the ';' or use ISCC with the /D switch.
 
 #pragma option -v+
 #pragma verboselevel 9
 
-#define Debug
+;#define Debug
 
 ;#define AppEnterprise
 
@@ -22,7 +20,7 @@
 
 [Setup]
 AppName={#AppName}
-AppVerName={#AppName} version {#AppVersion}
+AppVersion={#AppVersion}
 DefaultDirName={pf}\{#AppName}
 DefaultGroupName={#AppName}
 UninstallDisplayIcon={app}\MyProg.exe

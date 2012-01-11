@@ -1,10 +1,10 @@
 ; -- CodeAutomation.iss --
 ;
-; This script shows how to use the COM Automation object support.
+; This script shows how to use IDispatch based COM Automation objects.
 
 [Setup]
 AppName=My Program
-AppVerName=My Program version 1.5
+AppVersion=1.5
 CreateAppDir=no
 DisableProgramGroupPage=yes
 DefaultGroupName=My Program
@@ -153,7 +153,7 @@ begin
 
   ForceDirectories(VDir.Path);
   SaveStringToFile(VDir.Path + '/index.htm', '<html><body>Inno Setup rocks!</body></html>', False);
-  if not ShellExec('open', IISURL + '/innosetup/index.htm', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode) then
+  if not ShellExecAsOriginalUser('open', IISURL + '/innosetup/index.htm', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode) then
     MsgBox('Can''t display the created virtual directory: ''' + SysErrorMessage(ErrorCode) + '''.', mbError, mb_Ok);
 end;
 
@@ -238,6 +238,41 @@ begin
     MsgBox('Microsoft Word is running.', mbInformation, mb_Ok)
 end;
 
+{--- Windows Firewall ---}
+
+const
+   NET_FW_IP_VERSION_ANY = 2;
+   NET_FW_SCOPE_ALL = 0;
+
+procedure FirewallButtonOnClick(Sender: TObject);
+var
+  Firewall, Application: Variant;
+begin
+  if MsgBox('Setup will now add itself to Windows Firewall as an authorized application for the current profile (' + GetUserNameString + '). Do you want to continue?', mbInformation, mb_YesNo) = idNo then
+    Exit;
+
+  { Create the main Windows Firewall COM Automation object }
+
+  try
+    Firewall := CreateOleObject('HNetCfg.FwMgr');
+  except
+    RaiseException('Please install Windows Firewall first.'#13#13'(Error ''' + GetExceptionMessage + ''' occurred)');
+  end;
+
+  { Add the authorization }
+
+  Application := CreateOleObject('HNetCfg.FwAuthorizedApplication');
+  Application.Name := 'Setup';
+  Application.IPVersion := NET_FW_IP_VERSION_ANY;
+  Application.ProcessImageFileName := ExpandConstant('{srcexe}');
+  Application.Scope := NET_FW_SCOPE_ALL;
+  Application.Enabled := True;
+
+  Firewall.LocalPolicy.CurrentProfile.AuthorizedApplications.Add(Application);
+
+  MsgBox('Setup is now an authorized application for the current profile', mbInformation, mb_Ok);
+end;
+
 {---}
 
 procedure CreateButton(ALeft, ATop: Integer; ACaption: String; ANotifyEvent: TNotifyEvent);
@@ -255,13 +290,15 @@ end;
 
 procedure InitializeWizard();
 var
-  Left, Top, TopInc: Integer;
+  Left, LeftInc, Top, TopInc: Integer;
 begin
   Left := WizardForm.WelcomeLabel2.Left;
-  TopInc := WizardForm.CancelButton.Height + 8;
+  LeftInc := WizardForm.CancelButton.Width + ScaleX(8);
+  TopInc := WizardForm.CancelButton.Height + ScaleY(8);
   Top := WizardForm.WelcomeLabel2.Top + WizardForm.WelcomeLabel2.Height - 4*TopInc;
 
   CreateButton(Left, Top, '&SQLDMO...', @SQLDMOButtonOnClick);
+  CreateButton(Left + LeftInc, Top, '&Firewall...', @FirewallButtonOnClick);
   Top := Top + TopInc;
   CreateButton(Left, Top, '&IIS...', @IISButtonOnClick);
   Top := Top + TopInc;
@@ -269,3 +306,5 @@ begin
   Top := Top + TopInc;
   CreateButton(Left, Top, '&Word...', @WordButtonOnClick);
 end;
+
+

@@ -4,7 +4,7 @@
 
 [Setup]
 AppName=My Program
-AppVerName=My Program version 1.5
+AppVersion=1.5
 DefaultDirName={pf}\My Program
 DefaultGroupName=My Program
 UninstallDisplayIcon={app}\MyProg.exe

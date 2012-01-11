@@ -4,7 +4,7 @@
 
 [Setup]
 AppName=My Program
-AppVerName=My Program version 1.5
+AppVersion=1.5
 CreateAppDir=no
 DisableProgramGroupPage=yes
 DefaultGroupName=My Program
@@ -19,6 +19,11 @@ Source: compiler:WizModernSmallImage.bmp; Flags: dontcopy
 procedure ButtonOnClick(Sender: TObject);
 begin
   MsgBox('You clicked the button!', mbInformation, mb_Ok);
+end;
+
+procedure BitmapImageOnClick(Sender: TObject);
+begin
+  MsgBox('You clicked the image!', mbInformation, mb_Ok);
 end;
 
 procedure FormButtonOnClick(Sender: TObject);
@@ -65,6 +70,7 @@ procedure CreateTheWizardPages;
 var
   Page: TWizardPage;
   Button, FormButton: TNewButton;
+  Panel: TPanel;
   CheckBox: TNewCheckBox;
   Edit: TNewEdit;
   PasswordEdit: TPasswordEdit;
@@ -72,7 +78,7 @@ var
   ComboBox: TNewComboBox;
   ListBox: TNewListBox;
   StaticText, ProgressBarLabel: TNewStaticText;
-  ProgressBar: TNewProgressBar;
+  ProgressBar, ProgressBar2, ProgressBar3: TNewProgressBar;
   CheckListBox, CheckListBox2: TNewCheckListBox;
   FolderTreeView: TFolderTreeView;
   BitmapImage, BitmapImage2, BitmapImage3: TBitmapImage;
@@ -90,9 +96,18 @@ begin
   Button.OnClick := @ButtonOnClick;
   Button.Parent := Page.Surface;
 
+  Panel := TPanel.Create(Page);
+  Panel.Width := Page.SurfaceWidth div 2 - ScaleX(8);
+  Panel.Left :=  Page.SurfaceWidth - Panel.Width;
+  Panel.Height := Button.Height * 2;
+  Panel.Caption := 'TPanel';
+  Panel.Color := clWindow;
+  Panel.ParentBackground := False;
+  Panel.Parent := Page.Surface;
+
   CheckBox := TNewCheckBox.Create(Page);
   CheckBox.Top := Button.Top + Button.Height + ScaleY(8);
-  CheckBox.Width := Page.SurfaceWidth;
+  CheckBox.Width := Page.SurfaceWidth div 2;
   CheckBox.Height := ScaleY(17);
   CheckBox.Caption := 'TNewCheckBox';
   CheckBox.Checked := True;
@@ -166,6 +181,25 @@ begin
   ProgressBar.Parent := Page.Surface;
   ProgressBar.Position := 25;
 
+  ProgressBar2 := TNewProgressBar.Create(Page);
+  ProgressBar2.Left := ProgressBarLabel.Width + ScaleX(8);
+  ProgressBar2.Top := ProgressBar.Top + ProgressBar.Height + ScaleY(4);
+  ProgressBar2.Width := Page.SurfaceWidth - ProgressBar.Left;
+  ProgressBar2.Height := ProgressBarLabel.Height + ScaleY(8);
+  ProgressBar2.Parent := Page.Surface;
+  ProgressBar2.Position := 50;
+  { Note: TNewProgressBar.State property only has an effect on Windows Vista and newer }
+  ProgressBar2.State := npbsError;
+
+  ProgressBar3 := TNewProgressBar.Create(Page);
+  ProgressBar3.Left := ProgressBarLabel.Width + ScaleX(8);
+  ProgressBar3.Top := ProgressBar2.Top + ProgressBar2.Height + ScaleY(4);
+  ProgressBar3.Width := Page.SurfaceWidth - ProgressBar.Left;
+  ProgressBar3.Height := ProgressBarLabel.Height + ScaleY(8);
+  ProgressBar3.Parent := Page.Surface;
+  { Note: TNewProgressBar.Style property only has an effect on Windows XP and newer }
+  ProgressBar3.Style := npbstMarquee;
+  
   { TNewCheckListBox }
 
   Page := CreateCustomPage(Page.ID, 'Custom wizard page controls', 'TNewCheckListBox');
@@ -214,6 +248,8 @@ begin
   BitmapImage := TBitmapImage.Create(Page);
   BitmapImage.AutoSize := True;
   BitmapImage.Bitmap.LoadFromFile(BitmapFileName);
+  BitmapImage.Cursor := crHand;
+  BitmapImage.OnClick := @BitmapImageOnClick;
   BitmapImage.Parent := Page.Surface;
 
   BitmapImage2 := TBitmapImage.Create(Page);
@@ -223,6 +259,8 @@ begin
   BitmapImage2.Left := BitmapImage.Width + 10;
   BitmapImage2.Height := 2*BitmapImage.Height;
   BitmapImage2.Width := 2*BitmapImage.Width;
+  BitmapImage2.Cursor := crHand;
+  BitmapImage2.OnClick := @BitmapImageOnClick;
   BitmapImage2.Parent := Page.Surface;
 
   BitmapImage3 := TBitmapImage.Create(Page);
@@ -231,6 +269,8 @@ begin
   BitmapImage3.Left := 3*BitmapImage.Width + 20;
   BitmapImage3.Height := 4*BitmapImage.Height;
   BitmapImage3.Width := 4*BitmapImage.Width;
+  BitmapImage3.Cursor := crHand;
+  BitmapImage3.OnClick := @BitmapImageOnClick;
   BitmapImage3.Parent := Page.Surface;
 
   { TRichViewer }
@@ -256,7 +296,7 @@ procedure URLLabelOnClick(Sender: TObject);
 var
   ErrorCode: Integer;
 begin
-  ShellExec('open', 'http://www.innosetup.com', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);
+  ShellExecAsOriginalUser('open', 'http://www.innosetup.com/', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);
 end;
 
 procedure CreateAboutButtonAndURLLabel(ParentForm: TSetupForm; CancelButton: TNewButton);
@@ -280,7 +320,10 @@ begin
   URLLabel.Parent := ParentForm;
   { Alter Font *after* setting Parent so the correct defaults are inherited first }
   URLLabel.Font.Style := URLLabel.Font.Style + [fsUnderline];
-  URLLabel.Font.Color := clBlue;
+  if GetWindowsVersion >= $040A0000 then   { Windows 98 or later? }
+    URLLabel.Font.Color := clHotLight
+  else
+    URLLabel.Font.Color := clBlue;
   URLLabel.Top := AboutButton.Top + AboutButton.Height - URLLabel.Height - 2;
   URLLabel.Left := AboutButton.Left + AboutButton.Width + ScaleX(20);
 end;
@@ -318,3 +361,4 @@ begin
 
   CreateAboutButtonAndURLLabel(UninstallProgressForm, UninstallProgressForm.CancelButton);
 end;
+

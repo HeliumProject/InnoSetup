@@ -3,9 +3,9 @@ library MyDll;
 uses
   Windows;
 
-procedure MyDllFunc(hWnd: Integer; lpText, lpCaption: PChar; uType: Cardinal); stdcall;
+procedure MyDllFunc(hWnd: Integer; lpText, lpCaption: PAnsiChar; uType: Cardinal); stdcall;
 begin
-  MessageBox(hWnd, lpText, lpCaption, uType);
+  MessageBoxA(hWnd, lpText, lpCaption, uType);
 end;
 
 exports MyDllFunc;

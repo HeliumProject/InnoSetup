@@ -11,13 +11,15 @@ DefaultDirName={pf}\{cm:MyAppName}
 DefaultGroupName={cm:MyAppName}
 UninstallDisplayIcon={app}\MyProg.exe
 VersionInfoDescription=My Program Setup
+VersionInfoProductName=My Program
 OutputDir=userdocs:Inno Setup Examples Output
 ; Uncomment the following line to disable the "Select Setup Language"
 ; dialog and have it rely solely on auto-detection.
 ;ShowLanguageDialog=no
 ; If you want all languages to be listed in the "Select Setup Language"
 ; dialog, even those that can't be displayed in the active code page,
-; uncomment the following line.
+; uncomment the following line. Note: Unicode Inno Setup always displays
+; all languages.
 ;ShowUndisplayableLanguages=yes
 
 [Languages]

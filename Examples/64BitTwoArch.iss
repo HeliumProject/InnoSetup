@@ -6,11 +6,11 @@
 
 [Setup]
 AppName=My Program
-AppVerName=My Program version 1.5
+AppVersion=1.5
 DefaultDirName={pf}\My Program
 DefaultGroupName=My Program
 UninstallDisplayIcon={app}\MyProg.exe
-Compression=lzma
+Compression=lzma2
 SolidCompression=yes
 OutputDir=userdocs:Inno Setup Examples Output
 ; "ArchitecturesInstallIn64BitMode=x64" requests that the install be

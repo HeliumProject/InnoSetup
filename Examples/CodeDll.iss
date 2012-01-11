@@ -4,7 +4,7 @@
 
 [Setup]
 AppName=My Program
-AppVerName=My Program version 1.5
+AppVersion=1.5
 DefaultDirName={pf}\My Program
 DisableProgramGroupPage=yes
 UninstallDisplayIcon={app}\MyProg.exe
@@ -23,18 +23,18 @@ const
   MB_ICONINFORMATION = $40;
 
 //importing a Windows API function
-function MessageBox(hWnd: Integer; lpText, lpCaption: String; uType: Cardinal): Integer;
+function MessageBox(hWnd: Integer; lpText, lpCaption: AnsiString; uType: Cardinal): Integer;
 external 'MessageBoxA@user32.dll stdcall';
 
 //importing a custom DLL function, first for Setup, then for uninstall
-procedure MyDllFuncSetup(hWnd: Integer; lpText, lpCaption: String; uType: Cardinal);
+procedure MyDllFuncSetup(hWnd: Integer; lpText, lpCaption: AnsiString; uType: Cardinal);
 external 'MyDllFunc@files:MyDll.dll stdcall setuponly';
 
-procedure MyDllFuncUninstall(hWnd: Integer; lpText, lpCaption: String; uType: Cardinal);
+procedure MyDllFuncUninstall(hWnd: Integer; lpText, lpCaption: AnsiString; uType: Cardinal);
 external 'MyDllFunc@{app}\MyDll.dll stdcall uninstallonly';
 
 //importing a function for a DLL which might not exist at runtime
-procedure DelayLoadedFunc(hWnd: Integer; lpText, lpCaption: String; uType: Cardinal);
+procedure DelayLoadedFunc(hWnd: Integer; lpText, lpCaption: AnsiString; uType: Cardinal);
 external 'DllFunc@DllWhichMightNotExist.dll stdcall delayload';
 
 function NextButtonClick(CurPage: Integer): Boolean;
