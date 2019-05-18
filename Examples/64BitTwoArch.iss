@@ -1,6 +1,9 @@
 ; -- 64BitTwoArch.iss --
 ; Demonstrates how to install a program built for two different
-; architectures (x86 and x64) using a single installer.
+; architectures (x86 and x64) using a single installer: on a "x86"
+; edition of Windows the x86 version of the program will be
+; installed but on a "x64" edition of Windows the x64 version will
+; be installed.
 
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING .ISS SCRIPT FILES!
 
@@ -25,9 +28,12 @@ ArchitecturesInstallIn64BitMode=x64
 [Files]
 ; Install MyProg-x64.exe if running in 64-bit mode (x64; see above),
 ; MyProg.exe otherwise.
+; Place all x64 files here
 Source: "MyProg-x64.exe"; DestDir: "{app}"; DestName: "MyProg.exe"; Check: Is64BitInstallMode
-Source: "MyProg.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "MyProg.chm"; DestDir: "{app}"
+; Place all x86 files here, first one should be marked 'solidbreak'
+Source: "MyProg.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: solidbreak
+; Place all common files here, first one should be marked 'solidbreak'
+Source: "MyProg.chm"; DestDir: "{app}"; Flags: solidbreak
 Source: "Readme.txt"; DestDir: "{app}"; Flags: isreadme
 
 [Icons]

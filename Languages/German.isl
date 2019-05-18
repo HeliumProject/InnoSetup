@@ -1,8 +1,8 @@
 ; ******************************************************
 ; ***                                                ***
-; *** Inno Setup version 5.5.0+ German messages      ***
+; *** Inno Setup version 5.5.3+ German messages      ***
 ; ***                                                ***
-; *** Changes 5.5.0+ Author:                         ***
+; *** Changes 5.5.3+ Author:                         ***
 ; ***                                                ***
 ; ***   Peter Stadler(Peter.Stadler@univie.ac.at)    ***
 ; *** Original Author:                               ***
@@ -12,6 +12,7 @@
 ; *** Contributors:                                  ***
 ; ***                                                ***
 ; ***   Roland Ruder (info@rr4u.de)                  ***
+; ***   Hans Sperber (Hans.Sperber@de.bosch.com)     ***
 ; ***   LaughingMan (puma.d@web.de)                  ***
 ; ***                                                ***
 ; ******************************************************
@@ -167,7 +168,7 @@ DirDoesntExist=Der Ordner:%n%n%1%n%nist nicht vorhanden. Soll der Ordner erstell
 ; *** "Select Components" wizard page
 WizardSelectComponents=Komponenten auswählen
 SelectComponentsDesc=Welche Komponenten sollen installiert werden?
-SelectComponentsLabel2=Wählen Sie die Komponenten aus, die Sie installieren möchten. Klicken Sie auf "Weiter", wenn sie bereit sind fortzufahren.
+SelectComponentsLabel2=Wählen Sie die Komponenten aus, die Sie installieren möchten. Klicken Sie auf "Weiter", wenn Sie bereit sind fortzufahren.
 FullInstallation=Vollständige Installation
 ; if possible don't translate 'Compact' as 'Minimal' (I mean 'Minimal' in your language)
 CompactInstallation=Kompakte Installation
@@ -211,15 +212,15 @@ WizardPreparing=Vorbereitung der Installation
 PreparingDesc=Das Setup bereitet die Installation von [name] auf diesen Computer vor.
 PreviousInstallNotCompleted=Eine vorherige Installation/Deinstallation eines Programms wurde nicht abgeschlossen. Der Computer muss neu gestartet werden, um die Installation/Deinstallation zu beenden.%n%nStarten Sie das Setup nach dem Neustart Ihres Computers erneut, um die Installation von [name] durchzuführen.
 CannotContinue=Das Setup kann nicht fortfahren. Bitte klicken Sie auf "Abbrechen" zum Verlassen.
-ApplicationsFound=Die folgenden Anwendungen benutzen Files, die upgedated werden müssen. Es wird empfohlen, Setup zu erlauben, diese Anwendungen zu schliessen.
-ApplicationsFound2=Die folgenden Anwendungen benutzen Files, die upgedated werden müssen. Es wird empfohlen, Setup zu erlauben, diese Anwendungen zu schliessen. Nachdem die Installation fertiggestellt wurde, versucht Setup diese Anwendungen wieder zu starten.
-CloseApplications=&Schliesse automatisch die Anwendungen
-DontCloseApplications=&Schliesse die Anwendungen nicht
-
+ApplicationsFound=Die folgenden Anwendungen benutzen Dateien, die aktualisiert werden müssen. Es wird empfohlen, Setup zu erlauben, diese Anwendungen zu schließen.
+ApplicationsFound2=Die folgenden Anwendungen benutzen Dateien, die aktualisiert werden müssen. Es wird empfohlen, Setup zu erlauben, diese Anwendungen zu schließen. Nachdem die Installation fertiggestellt wurde, versucht Setup diese Anwendungen wieder zu starten.
+CloseApplications=&Schließe automatisch die Anwendungen
+DontCloseApplications=&Schließe die Anwendungen nicht
+ErrorCloseApplications=Das Setup konnte nicht alle Anwendungen automatisch schließen. Es wird empfohlen, alle Anwendungen zu schließen, die Dateien benutzen, die vom Setup vor einer Fortsetzung aktualisiert werden müssen.  
 
 ; *** "Installing" wizard page
 WizardInstalling=Installiere ...
-InstallingLabel=Warten Sie bitte während [name] auf Ihrem Computer installiert wird.
+InstallingLabel=Warten Sie bitte, während [name] auf Ihrem Computer installiert wird.
 
 ; *** "Setup Completed" wizard page
 FinishedHeadingLabel=Beenden des [name] Setup-Assistenten
@@ -307,7 +308,7 @@ UninstallUnknownEntry=In der Deinstallations-Datei wurde ein unbekannter Eintrag
 ConfirmUninstall=Sind Sie sicher, dass Sie %1 und alle zugehörigen Komponenten entfernen möchten?
 UninstallOnlyOnWin64=Diese Installation kann nur unter 64-bit Windows-Versionen entfernt werden.
 OnlyAdminCanUninstall=Diese Installation kann nur von einem Benutzer mit Administrator-Rechten entfernt werden.
-UninstallStatusLabel=Warten Sie bitte während %1 von Ihrem Computer entfernt wird.
+UninstallStatusLabel=Warten Sie bitte, während %1 von Ihrem Computer entfernt wird.
 UninstalledAll=%1 wurde erfolgreich von Ihrem Computer entfernt.
 UninstalledMost=Entfernen von %1 beendet.%n%nEinige Komponenten konnten nicht entfernt werden. Diese können von Ihnen manuell gelöscht werden.
 UninstalledAndNeedsRestart=Um die Deinstallation von %1 abzuschließen, muss Ihr Computer neu gestartet werden.%n%nMöchten Sie jetzt neu starten?
@@ -341,5 +342,5 @@ AssocFileExtension=&Registriere %1 mit der %2-Dateierweiterung
 AssocingFileExtension=%1 wird mit der %2-Dateierweiterung registriert...
 AutoStartProgramGroupDescription=Beginn des Setups:
 AutoStartProgram=Starte automatisch%1
-AddonHostProgramNotFound=%1 konnte im ausgwählten Ordner nicht gefunden werden.%n%nMöchten Sie dennoch fortfahren?
+AddonHostProgramNotFound=%1 konnte im ausgewählten Ordner nicht gefunden werden.%n%nMöchten Sie dennoch fortfahren?
 

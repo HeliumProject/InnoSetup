@@ -1,4 +1,4 @@
-; *** Inno Setup version 5.5.0+ English messages ***
+; *** Inno Setup version 5.5.3+ English messages ***
 ;
 ; To download user-contributed translations of this file, go to:
 ;   http://www.jrsoftware.org/files/istrans/
@@ -207,6 +207,7 @@ ApplicationsFound=The following applications are using files that need to be upd
 ApplicationsFound2=The following applications are using files that need to be updated by Setup. It is recommended that you allow Setup to automatically close these applications. After the installation has completed, Setup will attempt to restart the applications.
 CloseApplications=&Automatically close the applications
 DontCloseApplications=&Do not close the applications
+ErrorCloseApplications=Setup was unable to automatically close all applications. It is recommended that you close all applications using files that need to be updated by Setup before continuing.
 
 ; *** "Installing" wizard page
 WizardInstalling=Installing
@@ -215,7 +216,7 @@ InstallingLabel=Please wait while Setup installs [name] on your computer.
 ; *** "Setup Completed" wizard page
 FinishedHeadingLabel=Completing the [name] Setup Wizard
 FinishedLabelNoIcons=Setup has finished installing [name] on your computer.
-FinishedLabel=Setup has finished installing [name] on your computer. The application may be launched by selecting the installed icons.
+FinishedLabel=Setup has finished installing [name] on your computer. The application may be launched by selecting the installed shortcuts.
 ClickFinish=Click Finish to exit Setup.
 FinishedRestartLabel=To complete the installation of [name], Setup must restart your computer. Would you like to restart now?
 FinishedRestartMessage=To complete the installation of [name], Setup must restart your computer.%n%nWould you like to restart now?
@@ -322,9 +323,9 @@ ShutdownBlockReasonUninstallingApp=Uninstalling %1.
 [CustomMessages]
 
 NameAndVersion=%1 version %2
-AdditionalIcons=Additional icons:
-CreateDesktopIcon=Create a &desktop icon
-CreateQuickLaunchIcon=Create a &Quick Launch icon
+AdditionalIcons=Additional shortcuts:
+CreateDesktopIcon=Create a &desktop shortcut
+CreateQuickLaunchIcon=Create a &Quick Launch shortcut
 ProgramOnTheWeb=%1 on the Web
 UninstallProgram=Uninstall %1
 LaunchProgram=Launch %1

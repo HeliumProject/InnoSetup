@@ -1,4 +1,4 @@
-; *** Inno Setup version 5.5.0+ Dutch messages ***
+; *** Inno Setup version 5.5.3+ Dutch messages ***
 ;
 ; This file is based on user-contributed translations by various authors
 ;
@@ -44,8 +44,8 @@ WinVersionTooLowError=Dit programma vereist %1 versie %2 of hoger.
 WinVersionTooHighError=Dit programma kan niet worden geïnstalleerd onder %1 versie %2 of hoger.
 AdminPrivilegesRequired=U moet aangemeld zijn als een systeembeheerder om dit programma te kunnen installeren.
 PowerUserPrivilegesRequired=U moet ingelogd zijn als systeembeheerder of als gebruiker met systeembeheerders rechten om dit programma te kunnen installeren.
-SetupAppRunningError=Setup heeft vastgesteld dat %1 op dit moment actief is.%n%nSluit alle vensters van dit programma, en klik daarna op OK om verder te gaan, of op Annuleren om Setup af te sluiten.
-UninstallAppRunningError=Het verwijderprogramma heeft vastgesteld dat %1 op dit moment actief is.%n%nSluit alle vensters van dit programma, en klik daarna op OK om verder te gaan, of op Annuleren om het verwijderen af te breken.
+SetupAppRunningError=Setup heeft vastgesteld dat %1 op dit moment actief is.%n%nSluit alle vensters hiervan, en klik daarna op OK om verder te gaan, of op Annuleren om Setup af te sluiten.
+UninstallAppRunningError=Het verwijderprogramma heeft vastgesteld dat %1 op dit moment actief is.%n%nSluit alle vensters hiervan, en klik daarna op OK om verder te gaan, of op Annuleren om het verwijderen af te breken.
 
 ; *** Misc. errors
 ErrorCreatingDir=Setup kan de map "%1" niet maken
@@ -190,6 +190,7 @@ ApplicationsFound=De volgende programma's gebruiken bestanden die moeten worden 
 ApplicationsFound2=De volgende programma's gebruiken bestanden die moeten worden bijgewerkt door Setup. U wordt aanbevolen Setup toe te staan om automatisch deze programma's af te sluiten. Nadat de installatie is voltooid zal Setup proberen de applicaties opnieuw op te starten.
 CloseApplications=&Programma's automatisch afsluiten
 DontCloseApplications=Programma's &niet afsluiten
+ErrorCloseApplications=Setup kon niet alle programma's automatisch afsluiten. U wordt aanbevolen alle programma's die bestanden gebruiken die moeten worden bijgewerkt door Setup af te sluiten voordat u verder gaat.
 
 ; *** "Installing" wizard page
 WizardInstalling=Bezig met installeren
